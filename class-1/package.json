@@ -2,7 +2,7 @@
   "name": "midudev_node_course",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "1.os-info.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,6 +17,9 @@
     "url": "https://github.com/chrisWO92/nodejscourse/issues"
   },
   "homepage": "https://github.com/chrisWO92/nodejscourse#readme",
+  "dependencies": {
+    "picocolors": "^1.1.1"
+  },
   "devDependencies": {
     "standard": "^17.1.2"
   },
