@@ -12,6 +12,7 @@ POST http://localhost:1234/movies
 Content-Type: application/json
 
 {
+    "sql": "SELECT * FROM MOVIES",
     "title": "The Godfather",
     "year": 1975,
     "director": "Francis Ford Cappola",

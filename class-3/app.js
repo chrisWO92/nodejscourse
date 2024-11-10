@@ -1,7 +1,7 @@
 const express = require('express')
 const crypto = require('node:crypto')
 const movies = require('./movies.json')
-const z = require('zod')
+const { validateMovie } = require('./schemas/movies')
 
 const app = express()
 app.use(express.json()) // middleware para poder recibir con req.body lo que enviemos en el body
@@ -34,26 +34,15 @@ app.get('/movies/:id', (req, res) => {
 })
 
 app.post('/movies', (req, res) => {
+    const result = validateMovie(req.body)
 
-    const {
-        title,
-        genre,
-        year,
-        director,
-        duration,
-        rate,
-        poster
-    } = req.body
+    if (result.error) {
+        return res.status(400).json({ error: JSON.parse(result.error.message) })
+    }
 
     const newMovie = {
         id: crypto.randomUUID(), // uuid v4
-        title,
-        genre,
-        director,
-        year,
-        duration,
-        rate: rate ?? 0,
-        poster
+        ...result.data // no es lo mismo que req.body ya que esta no tiene las validaciones
     }
 
     movies.push(newMovie)
