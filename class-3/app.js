@@ -1,7 +1,10 @@
 const express = require('express')
+const crypto = require('node:crypto')
 const movies = require('./movies.json')
+const z = require('zod')
 
 const app = express()
+app.use(express.json()) // middleware para poder recibir con req.body lo que enviemos en el body
 app.disable('x-powered-by')
 
 app.get('/', (req, res) => {
@@ -28,6 +31,34 @@ app.get('/movies/:id', (req, res) => {
     if (movie) return res.json(movie)
 
     res.status(404).json({ message: 'Movie not found' })
+})
+
+app.post('/movies', (req, res) => {
+
+    const {
+        title,
+        genre,
+        year,
+        director,
+        duration,
+        rate,
+        poster
+    } = req.body
+
+    const newMovie = {
+        id: crypto.randomUUID(), // uuid v4
+        title,
+        genre,
+        director,
+        year,
+        duration,
+        rate: rate ?? 0,
+        poster
+    }
+
+    movies.push(newMovie)
+
+    res.status(201).json(newMovie) // Actualizar caché del cliente
 })
 
 const PORT = process.env.PORT ?? 1234

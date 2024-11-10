@@ -17,5 +17,5 @@ Content-Type: application/json
     "director": "Francis Ford Cappola",
     "duration": 175,
     "poster": "https://i.ebayimg.com/images/g/4goAAOSwMyBe7hnQ/s-l1200.webp",
-    "genre": ["Crime", "Drama"],
+    "genre": ["Crime", "Drama"]
 }
