@@ -1,0 +1,4 @@
+// así importamos un json ahora en ESModules 
+import { createRequire } from 'node:module'
+const require = createRequire(import.meta.url)
+export const readJSON = (path) => require(path) 
