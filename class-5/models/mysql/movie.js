@@ -1,15 +1,26 @@
-import { randomUUID } from 'node:crypto'
 import mysql from 'mysql2/promise'
 
-const config = {
+import dotenv from 'dotenv';
+dotenv.config();
+
+
+const config1 = {
     host: 'localhost',
     user: 'root',
     port: 3306,
-    password: '200030208Cps*',         // ← aquí actualizas la contraseña
+    password: '200030208Cps*',
     database: 'moviesdb'
 }
 
-const connection = await mysql.createConnection(config)
+const config2 = {
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    port: process.env.DB_PORT,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
+}
+
+const connection = await mysql.createConnection(config2)
 
 export class MovieModel {
 
@@ -23,16 +34,18 @@ export class MovieModel {
             const genreId = await connection.query(
                 'SELECT id FROM genre WHERE LOWER(genre_name) = ?;', [genre.toLowerCase()]
             )
-
+            console.log(genreId)
             const moviesIds = await connection.query(
                 `SELECT BIN_TO_UUID(movie_id) as movie_id, movie.movie_title, movie.year, movie.director, movie.duration, movie.rate, movie.poster FROM movie_genres JOIN movie ON movie.id = movie_genres.movie_id WHERE genre_id = ?;`, [genreId[0][0].id]
             )
+            console.log('moviesIds')
+            console.log(moviesIds)
 
             return moviesIds[0];
 
         }
 
-        return result[0]
+        return result
     }
 
     static async getByID({ id }) {

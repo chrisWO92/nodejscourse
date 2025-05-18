@@ -12,7 +12,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@libsql/client": "^0.15.6",
     "cors": "2.8.5",
+    "dotenv": "^16.5.0",
     "express": "4.21.1",
     "mysql2": "^3.14.1",
     "zod": "3.23.8"
