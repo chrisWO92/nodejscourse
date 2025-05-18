@@ -1,6 +1,11 @@
 import express, { json } from 'express'
-import { moviesRouter } from './routes/movies.js'
+import { createMovieRouter } from './routes/movies.js'
 import { corsMiddleware } from './middlewares/cors.js'
+
+//import { MovieModel } from "./models/mysql/movie.js"
+import { MovieModel } from "./models/turso/movie.js"
+
+
 
 // en el futuro lo anterior será como sigue
 /* 
@@ -16,7 +21,7 @@ app.disable('x-powered-by')
 app.get('/', (req, res) => {
     res.json({ message: 'hola mundo' })
 })
-app.use('/movies', moviesRouter)
+app.use('/movies', createMovieRouter({ movieModel: MovieModel }))
 
 const PORT = process.env.PORT ?? 1234
 
