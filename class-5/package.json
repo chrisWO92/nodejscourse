@@ -5,7 +5,9 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
-    "dev:1": "nodemon app.js",
+    "start:mysql": "nodemon server-with-mysql.js",
+    "start:turso": "nodemon server-with-turso.js",
+    "start:local": "nodemon server-with-local.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
