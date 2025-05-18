@@ -107,7 +107,7 @@ export class MovieModel {
         } = input
 
         await connection.query(
-            `UPDATE movie SET movie_title = ?, year = ?, director = ?, duration = ?, poster = ?, rate = ? WHERE id = UUID_TO_BIN(?);`, [movie_title, year, director, duration, , poster, rate, id]
+            `UPDATE movie SET movie_title = ?, year = ?, director = ?, duration = ?, poster = ?, rate = ? WHERE id = UUID_TO_BIN(?);`, [movie_title, year, director, duration, poster, rate, id]
         )
 
         const updatedMovie = await connection.query(
